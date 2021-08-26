@@ -7,7 +7,9 @@ use Utopia\Database\Query;
 use Utopia\Validator;
 use Utopia\Validator\Text;
 
-App::get('/posts')
+App::get('/v1/posts')
+    ->label('sdk.namespace', 'posts')
+    ->label('sdk.method', 'listPosts')
     ->inject('request')
     ->inject('response')
     ->inject("db")
@@ -21,7 +23,9 @@ App::get('/posts')
         }
     );
 
-App::get('/posts/:postId')
+App::get('/v1/posts/:postId')
+    ->label('sdk.namespace', 'posts')
+    ->label('sdk.method', 'getPost')
     ->param('postId', '', new Text(255))
     ->inject('request')
     ->inject('response')
@@ -41,7 +45,9 @@ App::get('/posts/:postId')
         }
     );
 
-App::post('/posts')
+App::post('/v1/posts')
+    ->label('sdk.namespace', 'posts')
+    ->label('sdk.method', 'createPost')
     ->param('author', '', new Text(255))
     ->param('title', '', new Text(255))
     ->param('text', '', new Text(16777216))
@@ -65,7 +71,9 @@ App::post('/posts')
         }
     );
 
-App::delete('/posts')
+App::delete('/v1/posts')
+    ->label('sdk.namespace', 'posts')
+    ->label('sdk.method', 'deletePost')
     ->param('id', '', new Text(255))
     ->inject('request')
     ->inject('response')
@@ -88,7 +96,9 @@ App::delete('/posts')
     );
 
 
-App::patch('/posts')
+App::patch('/v1/posts')
+    ->label('sdk.namespace', 'posts')
+    ->label('sdk.method', 'updatePost')
     ->param('id', '', new Text(255))
     ->param('title', '', new Text(255))
     ->param('text', '', new Text(16777216))
