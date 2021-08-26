@@ -24,6 +24,17 @@ $http->set([
 ]);
 App::setMode(App::MODE_TYPE_PRODUCTION);
 
+App::error(function ($error, $response) {
+    Console::error($error);
+    
+    $response
+    ->addHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
+    ->addHeader('Expires', '0')
+    ->addHeader('Pragma', 'no-cache')
+    ->setStatusCode(500)
+    ->json(['error' => "Unexpeced error: " . $error]);
+}, ['error', 'response']);
+
 // INIT REQUIRED STUFF
 $preloader = new Preloader();
 $preloader
@@ -76,27 +87,19 @@ $preloader
 
 // PARSE THE HTTP REQUEST
 $http->on('request', function (SwooleRequest $swooleRequest, SwooleResponse $swooleResponse) use ($register) {
-  
-   
+    $request = new Request($swooleRequest);
+    $response = new Response($swooleResponse);
 
-    try {
-        $request = new Request($swooleRequest);
-        $response = new Response($swooleResponse);
+    Console::success('Request start: ' . $request->getURI());
     
-        Console::success('Request start: ' . $request->getURI());
-       
-        App::setResource('db', function () use($register) {
-            return $register->get("db");
-        });
-        
+    App::setResource('db', function () use($register) {
+        return $register->get("db");
+    });
     
-        $app = new App('UTC');
 
-        $app->run($request, $response);
-    } catch(Exception $err) {
-        Console::error($err);
-        $swooleResponse->end('error: '.$err->getMessage());
-    }
+    $app = new App('UTC');
+
+    $app->run($request, $response);
 });
 
 // START HTTP SERVER
