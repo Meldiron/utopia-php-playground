@@ -1,1 +1,4 @@
 vendor
+db_data
+node_modules
+.idea

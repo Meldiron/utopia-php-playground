@@ -1,0 +1,40 @@
+
+<?php
+$code = $this->getParam('code', 'No code');
+?>
+
+<h1><?php echo $this->escape($code); ?></h1>
+
+<p>Litespeed installed, you can use it.</p>
+
+<hr>
+
+<div
+     data-service="posts.listPosts"
+     data-scope="sdk"
+     data-name="posts">
+
+    <div data-ls-if="0 == {{posts.posts.length}}" class="box margin-top margin-bottom">
+        <h3>No posts found</h3>
+    </div>
+
+    <div data-ls-if="0 != {{posts.posts.length}}">
+        <div><span data-ls-bind="{{posts.posts.length}}"></span> posts found</div>
+
+        <!--<ul data-ls-loop="project-functions.functions" data-ls-as="function" class="list">-->
+        <!--    <li class="clear">-->
+        <!--        <div class="pull-start margin-end avatar-container">-->
+        <!--            <img src="" data-ls-attrs="src=/images/runtimes/{{function.runtime|runtimeLogo}}?v=--><?php //echo APP_CACHE_BUSTER; ?><!--" alt="Function Runtime" class="avatar" loading="lazy" width="60" height="60" />-->
+        <!--        </div>-->
+        <!---->
+        <!--        <a data-ls-attrs="href=/console/functions/function?id={{function.$id}}&project={{router.params.project}}" class="button pull-end">Settings</a>-->
+        <!---->
+        <!--        <span data-ls-bind="{{function.name}}"></span>-->
+        <!---->
+        <!--        <p class="text-fade margin-bottom-no" data-ls-bind="{{function.runtime|runtimeName}} {{function.runtime|runtimeVersion}}"></p>-->
+        <!--    </li>-->
+        <!--</ul>-->
+
+
+    </div>
+</div>

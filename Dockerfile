@@ -48,7 +48,8 @@ RUN \
   automake \
   autoconf \
   gcc \
-  g++
+  g++ \
+  && docker-php-ext-install sockets opcache pdo_mysql
 
 
 WORKDIR /usr/src/code
@@ -65,4 +66,4 @@ RUN echo extension=swoole.so >> /usr/local/etc/php/conf.d/swoole.ini
 
 EXPOSE 8005
 
-CMD [ "php", "app/index.php"]
+CMD [ "php", "app/http.php"]

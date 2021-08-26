@@ -1,0 +1,24 @@
+{
+ "name": "php",
+ "version": "1.0.0",
+ "description": "**Setup:**",
+ "main": "index.js",
+ "scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1"
+ },
+ "repository": {
+  "type": "git",
+  "url": "git+https://github.com/Meldiron/utopia-php-playground.git"
+ },
+ "keywords": [],
+ "author": "",
+ "license": "ISC",
+ "bugs": {
+  "url": "https://github.com/Meldiron/utopia-php-playground/issues"
+ },
+ "devDependencies": {
+  "@prettier/plugin-php": "0.14.3",
+  "prettier": "2.0.5"
+ },
+ "homepage": "https://github.com/Meldiron/utopia-php-playground#readme"
+}
